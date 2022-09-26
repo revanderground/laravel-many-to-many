@@ -53,6 +53,16 @@
 
                                 </div>
 
+                                <div>
+                                    {{ $post->user->name }} has the roles of:
+                                    @forelse ( $post->user->roles as $role)
+                                        {{ $role->name }}
+
+                                    @empty
+                                        No roles.
+                                    @endforelse
+                                </div>
+
                                 <div class="card-text my-3">
                                     {{ $post->post_content }}
                                 </div>
