@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder
@@ -11,6 +12,15 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+
+        $roles = ['super-admin' => 10, 'admin' => 8, 'moderator' => 6, 'editor' => 4, 'designer' => 4, 'member' => 2, 'registered' => 1];
+
+        foreach($roles as $role => $level){
+            $newRole = new Role();
+            $newRole->name = $role;
+            $newRole->level = $level;
+            $newRole->save();
+        }
+
     }
 }
