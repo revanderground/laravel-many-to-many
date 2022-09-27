@@ -15,12 +15,11 @@ class PostTagTableSeeder extends Seeder
     {
         //
         $posts = Post::all();
-        $tags = Tag::all();
 
         foreach ($posts as $post) {
             $randomTags = Tag::inRandomOrder()->limit(3)->get();
             foreach ($randomTags as $tag) {
-                $post->tags()->attach([$tag->id]);
+                $post->tags()->attach($tag->id);
             }
 
         }

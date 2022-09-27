@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,8 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories= Category::all();
-        return view ('admin.posts.create', ['post'=> $post, 'categories' => $categories]);
+        $tags = Tag::all();
+        return view ('admin.posts.create', ['post'=> $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -49,14 +51,34 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->validationRules);
 
         $data = $request->all();
+
+        $request->validate($this->validationRules);
+        // $request->validate(
+        //     [
+        //         'title' => [
+        //             'min:3',
+        //             'max:255',
+        //             'required'
+        //         ],
+
+        //         'post_content' => 'min:5|required',
+        //         'post_image' => 'active_url',
+
+        //     ]
+        // );
 
         $data['user_id'] = Auth::id();
         $data['post_date'] = new DateTime();
 
-        Post::create($data);
+        $newPost = new Post();
+        $newPost->fill($data);
+        $newPost->save();
+        $newPost->tags()->sync($data['tags']);
+
+
+        // Post::create($data);
         return redirect()->route('admin.posts.index')->with('success', 'The post ' .$data["title"] . ' has been created successfully' );
     }
 
@@ -82,7 +104,8 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories= Category::all();
-        return view ('admin.posts.edit', ['pơst' =>$post, 'categories' => $categories]);
+        $tags = Tag::all();
+        return view ('admin.posts.edit', ['post' =>$post, 'categories' => $categories, 'tags' => $tags] );
     }
 
     /**
@@ -94,7 +117,20 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate($this->validationRules);
+
+        $request->validate(
+            [
+                'title' => [
+                    'min:3',
+                    'max:255',
+                    'required'
+                ],
+
+                'post_content' => 'min:5|required',
+                'post_image' => 'active_url',
+
+            ]
+        );
 
         $post = Post::findOrFail($id);
         $data = $request->all();
@@ -103,6 +139,8 @@ class PostController extends Controller
         $data['post_date'] = $post->post_date;
 
         $post->update($data);
+        $post->tags()->sync($data['tags']);
+
         return redirect()->route('admin.posts.index', ['id' => $post->id])->with('success', 'The post ' .$data["title"] . ' has been modified successfully' );
     }
 

@@ -34,6 +34,32 @@
     @enderror
 </div>
 
+<div class="form-group py-3 py-3">
+    <label for="input-tags">Tags:</label>
+    @foreach ($tags as $tag)
+        <div class="form-check form-switch">
+            <input
+            type="checkbox"
+            name="tags[]"
+            class="form-check-input"
+            id="input-tags"
+            value="{{ $tag->id }}"
+            {{ in_array( $tag->id, old('tags', [])) ? 'checked' : '' }}>
+            <label class="form-check-label" for="input-tags">
+                {{ $tag->name }}
+            </label>
+        </div>
+     @endforeach
+
+    @error('tags')
+        <div class="alert alert-danger">
+            {{ $message }}
+        </div>
+    @enderror
+</div>
+
+
+
 
 <div class="form-group py-3">
     <label for="input-post-content">Post content</label>
