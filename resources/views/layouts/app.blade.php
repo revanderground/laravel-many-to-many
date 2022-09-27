@@ -38,11 +38,11 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.posts.index') ? 'active' : '' }}" href="{{ route('admin.posts.index') }}">Posts</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">Categories</a>
-                        </li>
-
+                        {{-- @if(in_array(Aut::user()->roles[0]->level >= 8) --}}
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">Categories</a>
+                            </li>
+                       {{-- @endif --}}
 
                     </ul>
 
