@@ -31,6 +31,20 @@
                         </span>
                     </div>
 
+                    <div>
+                        Tags:
+                            <span class="badge badge-pill">
+                            @if (isset($post->tags))
+                                @foreach ($post->tags as $tag)
+                                {{ $tag->name }} -
+                                @endforeach
+                            @else
+                               No tag selected for this post
+                            @endif
+
+                        </span>
+                    </div>
+
                     <div class="card-subtitle fs-6 my-3">
                         Post with id: {{ $post->id }} | Post written on the: {{ $post->post_date }}
                         by {{ $post->user->name }}
