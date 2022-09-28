@@ -75,7 +75,7 @@ class PostController extends Controller
 
         $newPost = new Post();
 
-        $img_path = Storage::put('public/uploads', $data['post_image']);
+        $img_path = Storage::put('uploads', $data['post_image']);
         $data['post_image'] = $img_path;
 
         $newPost->fill($data);
