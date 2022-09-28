@@ -35,6 +35,7 @@ Route::middleware(('auth'))
         Route::resource('/posts', 'PostController');
         Route::patch('/posts/{id}/clear-category', 'PostController@clearCategory')->name('posts.clearCategory');
         Route::resource('/categories', 'CategoryController');
+        Route::resource('/tags', 'TagController');
 
     });
 
