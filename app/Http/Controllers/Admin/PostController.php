@@ -148,9 +148,10 @@ class PostController extends Controller
         $data['post_image'] = $img_path;
 
 
-        $post->update($data);
+        // $post->update($data);
+        $post->fill($data);
+        $post->save();
         $post->tags()->sync($data['tags']);
-
 
         return redirect()->route('admin.posts.index', ['post' => $post])->with('success', 'The post ' .$data["title"] . ' has been modified successfully' );
     }

@@ -88,8 +88,8 @@
 </div> --}}
 
 <div class="form-group py-3">
-    <label for="input-post-image">Upload image for your post</label>
-    <input type="file" class="form-control"  name="post_image" id="input-post-image" >
+    <label for="input-image-url">Upload image for your post</label>
+    <input type="file" class="form-control"  name="post_image" id="input-image-url">
     @error('post_image')
         <div class="alert alert-danger">
             {{ $message }}
