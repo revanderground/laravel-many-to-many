@@ -13,12 +13,6 @@
 
                     @include ('admin.tags.includes.form')
 
-                    <div class="form-group p-3 text-center">
-                        <button type="submit" class="btn btn-sm btn-primary">
-                            Edit post
-                        </button>
-                    </div>
-
                 </form>
 
             </div>

@@ -11,7 +11,7 @@
 
                     <div class="card-title text-center">
                         <h4 class="py-2">
-                            Category:
+                            Tag:
                         </h4>
                         <h2>
                             {{ $tag->name }}
@@ -31,6 +31,20 @@
 
                                 <div class="card-image text-center my-3">
                                     <img class = "w-50" src="{{ $post->post_image }}" alt="post-image">
+                                </div>
+
+                                <div>
+                                    Tags:
+                                        <span class="badge badge-pill">
+                                        @if (isset($post->tags))
+                                            @foreach ($post->tags as $tag)
+                                            {{ $tag->name }} -
+                                            @endforeach
+                                        @else
+                                           No tag selected for this post
+                                        @endif
+
+                                    </span>
                                 </div>
 
                                 <div>
@@ -70,7 +84,7 @@
                              </div>
                         </div>
                         @empty
-                            <li>This category has no posts</li>
+                            <li>This tag has no posts</li>
                         @endforelse
 
                 </div>

@@ -25,7 +25,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">
-                        <a href="{{ route('admin.categories.create')}}"
+                        <a href="{{ route('admin.tags.create')}}"
                             class="btn btn-sm btn-outline-primary">
                         Create new Tag</a>
                     </th>
@@ -36,11 +36,11 @@
 
                         <tr>
                             <td scope="row">
-                                {{ $category->id }}
+                                {{ $tag->id }}
                             </td>
 
                             <td>
-                                {{ $category->name }}
+                                {{ $tag->name }}
                             </td>
 
                             <td>

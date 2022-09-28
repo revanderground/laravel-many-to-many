@@ -12,11 +12,6 @@
 
                 @include ('admin.tags.includes.form')
 
-                <div class="form-group p-3 text-center">
-                    <button type="submit" class="btn btn-primary">
-                        Save & Publish
-                    </button>
-                </div>
 
             </form>
 
