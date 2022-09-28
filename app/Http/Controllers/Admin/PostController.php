@@ -75,6 +75,7 @@ class PostController extends Controller
 
         $newPost = new Post();
 
+
         $img_path = Storage::put('uploads', $data['post_image']);
         $data['post_image'] = $img_path;
 
@@ -145,6 +146,7 @@ class PostController extends Controller
 
         $img_path = Storage::put('uploads', $data['post_image']);
         $data['post_image'] = $img_path;
+
 
         $post->update($data);
         $post->tags()->sync($data['tags']);
