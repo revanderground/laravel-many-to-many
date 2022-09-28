@@ -10,7 +10,7 @@
                 <img class = "w-50" src="{{ $post->post_image}}" alt="post-image">
                 {{-- immagine come file --}}
             @else
-                <img class = "w-50" src="{{ asset('/storage/'. $post->post_image)}}" alt="post-image">
+                <img class = "w-50" src="{{ asset('/storage') . '/' . $post->post_image }}" alt="post-image">
                 {{-- immagine come url --}}
             @endif
         </div>
