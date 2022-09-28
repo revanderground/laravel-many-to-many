@@ -6,7 +6,7 @@
         </div>
 
         <div class="card-image text-center my-3">
-            <img class = "w-50" src="{{ $post->post_image }}" alt="post-image">
+            <img class = "w-50" src="{{ asset('/storage/'. $post->post_image)}}" alt="post-image">
         </div>
 
         <div>

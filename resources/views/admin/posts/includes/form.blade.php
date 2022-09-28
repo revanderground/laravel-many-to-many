@@ -14,10 +14,10 @@
 
 <div class="form-group py-3 py-3">
     <label for="input-category">Category</label>
-    <select type="text" class="form-control" id="input-category" name="category">
+    <select type="text" class="form-control" id="input-category" name="category_id">
         <option value="">No category</option>
         @foreach ($categories as $category)
-            <option value="{{  old('category'), $category->id }}"
+            <option value="{{ $category->id }}"
                 @isset($post->category)
                 {{ $category->id === $post->category->id ? 'selected' : '' }}
                 @endisset
@@ -75,7 +75,7 @@
 
 </div>
 
-<div class="form-group py-3">
+{{-- <div class="form-group py-3">
     <label for="input-post-image">Image for your post</label>
     <input type="text" class="form-control"  class="@error('title') is-invalid @enderror" name="post_image" id="input-post-image"
     value="{{ request()->routeIs('admin.posts.edit') ? $post->post_image : '' }}">
@@ -85,8 +85,16 @@
         </div>
     @enderror
 
+</div> --}}
 
-
+<div class="form-group py-3">
+    <label for="input-post-image">Upload image for your post</label>
+    <input type="file" class="form-control"  name="post_image" id="input-post-image" >
+    @error('post_image')
+        <div class="alert alert-danger">
+            {{ $message }}
+        </div>
+    @enderror
 
 </div>
 

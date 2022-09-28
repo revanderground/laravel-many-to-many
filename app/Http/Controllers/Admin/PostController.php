@@ -9,13 +9,14 @@ use App\Models\Tag;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
     private $validationRules = [
         'title' => 'min:3|max:255|required|unique:posts,title',
         'post_content' => 'min:5|required',
-        'post_image' => 'active_url',
+        // 'post_image' => 'active_url',
     ];
 
     /**
@@ -68,18 +69,22 @@ class PostController extends Controller
 
         //     ]
         // );
-
         $data['user_id'] = Auth::id();
         $data['post_date'] = new DateTime();
+        $category = Category::all();
 
         $newPost = new Post();
+
+        $img_path = Storage::put('public/uploads', $data['post_image']);
+        $data['post_image'] = $img_path;
+
         $newPost->fill($data);
         $newPost->save();
         $newPost->tags()->sync($data['tags']);
 
 
         // Post::create($data);
-        return redirect()->route('admin.posts.index')->with('success', 'The post ' .$data["title"] . ' has been created successfully' );
+        return redirect()->route('admin.posts.index', compact('category'))->with('success', 'The post ' .$data["title"] . ' has been created successfully' );
     }
 
     /**
@@ -127,7 +132,7 @@ class PostController extends Controller
                 ],
 
                 'post_content' => 'min:5|required',
-                'post_image' => 'active_url',
+                // 'post_image' => 'active_url',
 
             ]
         );
@@ -138,10 +143,14 @@ class PostController extends Controller
         $data['user_id'] = Auth::id();
         $data['post_date'] = $post->post_date;
 
+        $img_path = Storage::put('uploads', $data['post_image']);
+        $data['post_image'] = $img_path;
+
         $post->update($data);
         $post->tags()->sync($data['tags']);
 
-        return redirect()->route('admin.posts.index', ['id' => $post->id])->with('success', 'The post ' .$data["title"] . ' has been modified successfully' );
+
+        return redirect()->route('admin.posts.index', ['post' => $post])->with('success', 'The post ' .$data["title"] . ' has been modified successfully' );
     }
 
     /**
