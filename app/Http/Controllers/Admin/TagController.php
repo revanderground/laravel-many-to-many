@@ -49,7 +49,8 @@ class TagController extends Controller
         $tag->name = $data['name'];
         $tag->save();
 
-        return redirect()->route('admin.tags.index');
+        return redirect()->route('admin.tags.index')->with('success', $tag->name .
+        ' has been created');
     }
 
     /**
@@ -98,7 +99,8 @@ class TagController extends Controller
         $tag->save();
 
 
-        return redirect()->route('admin.tags.index');
+        return redirect()->route('admin.tags.index')->with('success', $tag->name .
+        ' has been modified');
     }
 
     /**
