@@ -40,7 +40,7 @@
                             </td>
 
                             <td>
-                                {{ $tag->name }}
+                                #{{ $tag->name }}
                             </td>
 
                             <td>

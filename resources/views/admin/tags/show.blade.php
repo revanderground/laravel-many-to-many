@@ -14,15 +14,19 @@
                             Tag:
                         </h4>
                         <h2>
-                            {{ $tag->name }}
+                            #{{ $tag->name }}
                         </h2>
                     </div>
                 </div>
             </div>
                 <div>
                         @forelse ( $tag->posts as $post)
+                            <div class="col-8 mx-auto  my-3">
+                                @include('admin.posts.includes.post', ['post' => $post]);
+                            </div>
 
-                        <div class="card my-card  col-6 mx-auto my-5">
+
+                        {{-- <div class="card my-card  col-6 mx-auto my-5">
                             <div class="card-body">
 
                                 <div class="card-title text-center">
@@ -38,7 +42,7 @@
                                         <span class="badge badge-pill">
                                         @if (isset($post->tags))
                                             @foreach ($post->tags as $tag)
-                                            {{ $tag->name }} -
+                                            #{{ $tag->name }} -
                                             @endforeach
                                         @else
                                            No tag selected for this post
@@ -82,7 +86,7 @@
                                 </div>
 
                              </div>
-                        </div>
+                        </div> --}}
                         @empty
                             <li>This tag has no posts</li>
                         @endforelse

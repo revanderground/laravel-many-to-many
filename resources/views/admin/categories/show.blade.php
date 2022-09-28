@@ -22,8 +22,20 @@
                 <div>
                         @forelse ( $category->posts as $post)
 
-                        <div class="card my-card  col-6 mx-auto my-5">
-                            <div class="card-body">
+                        <div class="card col-8 my-card mx-auto my-5 py-3">
+                            @include('admin.posts.includes.post', ['post' => $post]);
+                            <div class="card-subtitle text-center">
+                                <form class="d-inline" action="{{ route('admin.posts.clearCategory', $post->id) }}" method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-warning">
+                                        Remove post from this category
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                            {{-- <div class="card-body">
 
                                 <div class="card-title text-center">
                                     <h2>{{ $post->title }}</h2>
@@ -65,17 +77,9 @@
 
                                 <div class="card-text my-3">
                                     {{ $post->post_content }}
-                                </div>
+                                </div> --}}
 
-                                <div class="card-subtitle text-center">
-                                    <form class="d-inline" action="{{ route('admin.posts.clearCategory', $post->id) }}" method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="btn btn-warning">
-                                            Remove post from this category
-                                        </button>
-                                    </form>
-                                </div>
+
 
                              </div>
                         </div>
