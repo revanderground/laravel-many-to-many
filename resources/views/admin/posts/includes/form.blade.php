@@ -44,7 +44,7 @@
             class="form-check-input"
             id="input-tags"
             value="{{ $tag->id }}"
-            {{ in_array( $tag->id, old('tags', [])) ? 'checked' : '' }}>
+            {{ $post->tags->contains($tag) ? 'checked' : '' }}>
             <label class="form-check-label" for="input-tags">
                 {{ $tag->name }}
             </label>
